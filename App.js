@@ -1,45 +1,70 @@
 import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
-import { StyleSheet, Text, TextInput, View, Button, ScrollView, FlatList } from 'react-native';
+import { StyleSheet, Text, TextInput, View, Button, ScrollView, FlatList, Alert, Modal } from 'react-native';
+import Products from './components/Products';
+import AddItem from './components/AddItem';
 
 export default function App() {
-  const [item, setItem]= useState("");
-  const [items, setItems] = useState([]);
 
-  const handleSubmit = () => {
+  const [items, setItems] = useState([]);
+  const [showModal, setShowModal] = useState(false);
+  
+  const handleSubmit = (item) => {
     if (item !== ""){
       const idString = Date.now().toString();
       setItems(currentItems=> [{key: idString, name: item}, ...currentItems]);
-      setItem("");
+    } else {
+      setShowModal(true)
+
+      // Alert.alert("Warning", "Please enter a valid item",[
+      //   {text: "Ok",
+      //   onPress : () => console.warn("Refused")
+      //   },
+      //   {
+      //     text: "Understand",
+      //     onPress: () => console.warn("Understood")
+      //   }
+      // ], {cancelable: true});
     }
   }
+
+ const handleDelete = (key) =>{
+  setItems(currentItems => {
+    return currentItems.filter(item=> item.key !=key)
+  })
+ }
   return (
 
     <View style={styles.container}>
-      <View style={styles.inputContainer}>
-        <TextInput
-          style={styles.textInput}
-          placeholder='Add an item'
-          value= {item}
-          placeholderTextColor="white" // Change the placeholder text color
-          onChangeText={val => setItem(val)}
+      <Modal
+        visible={showModal}
+        onRequestClose={()=>setShowModal(false)}
+      >
+        <View style={styles.modalContainer}>
+          <View style={styles.modalContent}>
+            <View style={styles.modalHeader}>
+              <Text style={styles.modalHeaderText}>Hello world !</Text>
+            </View>
+            <View style={styles.modalBody}>
+              <ScrollView>
+              <Text style={styles.modalBodyText}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto culpa praesentium delectus numquam maxime voluptate aut, neque debitis assumenda reiciendis earum, excepturi officia architecto. Incidunt reprehenderit minus blanditiis tenetur assumenda?</Text>
+              </ScrollView>
+            </View>
+          </View>
+        </View>
+      </Modal>
+        <AddItem
+          handleSubmit={handleSubmit}
         />
-        <Button 
-          style={styles.buttonStyle}
-          title="Submit"
-          value={item}
-          onPress={handleSubmit}
-        />
-      </View>
-      
         <FlatList
-          contentContainerStyle={styles.contentContainer
-          }
+          contentContainerStyle={styles.contentContainer}
           data={items}
           renderItem={({item}) => 
-            <View style={styles.itemContainer}>
-              <Text style={styles.item}>{item.name}</Text>
-            </View>
+            <Products
+              name={item.name}
+              idString={item.key}
+              handleDelete={handleDelete}
+            />
           }
         />
 
@@ -59,27 +84,6 @@ export default function App() {
 }
 
 const styles = StyleSheet.create({
-  item:{
-    textAlign:"center",
-    backgroundColor: "pink",
-    color: "black",
-    fontSize: 20,
-    marginVertical: 6,
-    width: "100%"
-    
-  },
-  scrollViewList:{
-    margin: 10,
-    justifyContent:"center"
-  },
-  itemContainer:{
-    width:220
-    
-  },
-  buttonStyle:{
-    backgroundColor:"red",
-    padding:150
-  },
   container: {
     flex: 1,
     backgroundColor: '#fff',
@@ -88,21 +92,52 @@ const styles = StyleSheet.create({
     padding: 40,
     paddingTop: 60
   },
-  inputContainer:{
-    backgroundColor: "purple",
-    width: "80%",
-    flexDirection:"row",
-    justifyContent:"space-between"
+  scrollViewList:{
+    margin: 10,
+    justifyContent:"center"
   },
-  textInput:{
-    color:"white",
-    opacity: 1,
-    margin:10,
-    marginVertical: 6,
-  },
+
   contentContainer:{
     justifyContent: 'center',
     alignItems: 'center',
     width:"100%"
+  },
+  modalContainer:{
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(0,0,0,0.25)'
+},
+modalContent:{
+  backgroundColor: '#fff',
+  width: '80%',
+  height: '50%',
+  borderRadius: 10,
+  padding: 20,
+  alignItems: 'center',
+},
+modalHeader:{
+  width: '100%',
+  padding: 16,
+  alignItems: 'center',
+  borderTopLeftRadius: 15,
+  borderTopRightRadius: 15,
+  borderBottomWidth: 1,
+  borderBottomColor: 'lightgray'
+},
+modalHeaderText:{
+  color:'grey',
+  fontSize: 18
+},
+modalBody:{
+  width: '100%',
+  flex:1,
+  borderTopLeftRadius: 15,
+  borderTopRightRadius: 15,
+  alignItems: 'center',
+  justifyContent: 'center'
+},
+modalBodyText:{
+  fontSize:17,
 }
 });
