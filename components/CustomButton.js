@@ -1,17 +1,16 @@
 import React from 'react'
-import { StyleSheet } from 'react-native';
-import { Pressable, View, Text } from 'react-native';
+import { StyleSheet, TouchableOpacity,  View, Text } from 'react-native';
 
-function CustomButton({title, customHandleClick, customStyle}) {
+function CustomButton({customStyle, children, customHandleClick}) {
   return (
     <View>
-        <Pressable 
+        <TouchableOpacity 
+          activeOpacity={0.6}
           style={{...styles.button, ...customStyle}}
-          title={title}
           onPress={customHandleClick}
         >
-          <Text style={styles.textButton}>{title}</Text>
-        </Pressable>
+          <Text style={styles.textButton}>{children}</Text>
+        </TouchableOpacity>
     </View>
   )
 }
@@ -24,7 +23,8 @@ const styles = StyleSheet.create({
       backgroundColor: 'red',
       padding:5,
       height: 40,
-      width: 70
+      width: 70,
+      borderRadius:5
     },
     textButton:{
       color: 'white',

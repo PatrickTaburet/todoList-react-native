@@ -11,6 +11,7 @@ import {
 from 'react-native';
 import Products from './components/Products';
 import AddItem from './components/AddItem';
+import Header from './components/Header';
 
 export default function App() {
 
@@ -42,11 +43,10 @@ export default function App() {
   })
  }
   return (
-
-    <ImageBackground 
-      style={styles.container}
-      source={require('./assets/image/background.jpg')}
-    >
+    <ImageBackground style={styles.background} source={require('./assets/image/background.jpg')}>
+    
+     <Header style={styles.header}></Header>
+     <View style={styles.container}>
       <Modal
         visible={showModal}
         onRequestClose={()=>setShowModal(false)}
@@ -105,15 +105,24 @@ export default function App() {
           })}
         </View>
       </ScrollView> */}
+       </View>
     </ImageBackground>
- 
+   
   );
 }
 
 const styles = StyleSheet.create({
+  header:{
+      width: "100%",
+      position: 'absolute',
+      top: 0,
+      height: 150
+  },
+  background:{
+    flex:1
+  },
   container: {
     flex: 1,
-    backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
     padding: 40,

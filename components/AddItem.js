@@ -27,16 +27,12 @@ const AddItem = ({handleSubmit}) => {
         <View style={styles.buttonBox}>
           <CustomButton
             customStyle={styles.buttonStyle}
-            title="SUBMIT"
             customHandleClick={handleClick}
-          />
+          >SUBMIT</CustomButton>
           <CustomButton
-            title="CANCEL"
             customHandleClick={customHandleClick}
-          />
+          >CANCEL</CustomButton>
         </View>
-      
-
       </View>
   )
 }
@@ -45,22 +41,21 @@ export default AddItem
 
 const styles = StyleSheet.create({
     inputContainer:{
-        backgroundColor: "purple",
-        width: "100%",
-        flexDirection:"row",
-        justifyContent:"space-between"
-      },
-   
-      textInput:{
-        color:"white",
-        opacity: 1,
-        margin:10,
-        marginVertical: 6,
-        width:'50%'
-      },
+      backgroundColor: "purple",
+      width: "100%",
+      flexDirection:"row",
+      justifyContent:"space-between"
+    },
+    textInput:{
+      color:"white",
+      opacity: 1,
+      margin:10,
+      marginVertical: 6,
+      width:'50%'
+    },
     buttonStyle:{
-        backgroundColor:"blue",
-        padding:5
+      backgroundColor:"blue",
+      padding:5
     },
     buttonBox:{
       flexDirection:"row",
