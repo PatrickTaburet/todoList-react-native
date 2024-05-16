@@ -1,12 +1,16 @@
 import { StyleSheet, Text, View, TextInput, Button } from 'react-native'
 import React from 'react';
 import { useState } from 'react';
+import CustomButton from './CustomButton';
 const AddItem = ({handleSubmit}) => {
 
   const [item, setItem]= useState("");
   const inputHandler =  val =>{setItem(val)} 
   const handleClick = () => {
     handleSubmit(item);
+    setItem("");
+  }
+  const customHandleClick = () =>{
     setItem("");
   }
   
@@ -20,12 +24,19 @@ const AddItem = ({handleSubmit}) => {
           placeholderTextColor="white" // Change the placeholder text color
           onChangeText={inputHandler}
         />
-        <Button 
-          style={styles.buttonStyle}
-          title="Submit"
-          value={item}
-          onPress={handleClick}
-        />
+        <View style={styles.buttonBox}>
+          <CustomButton
+            customStyle={styles.buttonStyle}
+            title="SUBMIT"
+            customHandleClick={handleClick}
+          />
+          <CustomButton
+            title="CANCEL"
+            customHandleClick={customHandleClick}
+          />
+        </View>
+      
+
       </View>
   )
 }
@@ -35,7 +46,7 @@ export default AddItem
 const styles = StyleSheet.create({
     inputContainer:{
         backgroundColor: "purple",
-        width: "80%",
+        width: "100%",
         flexDirection:"row",
         justifyContent:"space-between"
       },
@@ -45,9 +56,13 @@ const styles = StyleSheet.create({
         opacity: 1,
         margin:10,
         marginVertical: 6,
+        width:'50%'
       },
     buttonStyle:{
-        backgroundColor:"red",
-        padding:150
+        backgroundColor:"blue",
+        padding:5
     },
+    buttonBox:{
+      flexDirection:"row",
+    }
 })

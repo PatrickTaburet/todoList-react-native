@@ -1,6 +1,14 @@
 import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
-import { StyleSheet, Text, TextInput, View, Button, ScrollView, FlatList, Alert, Modal } from 'react-native';
+import {
+  StyleSheet, Text, 
+  TextInput, View, 
+  Button, ScrollView, 
+  FlatList, Alert, 
+  Modal, Pressable, 
+  Image,
+  ImageBackground} 
+from 'react-native';
 import Products from './components/Products';
 import AddItem from './components/AddItem';
 
@@ -27,7 +35,7 @@ export default function App() {
       // ], {cancelable: true});
     }
   }
-
+  
  const handleDelete = (key) =>{
   setItems(currentItems => {
     return currentItems.filter(item=> item.key !=key)
@@ -35,10 +43,15 @@ export default function App() {
  }
   return (
 
-    <View style={styles.container}>
+    <ImageBackground 
+      style={styles.container}
+      source={require('./assets/image/background.jpg')}
+    >
       <Modal
         visible={showModal}
         onRequestClose={()=>setShowModal(false)}
+        animationType='slide'
+        transparent
       >
         <View style={styles.modalContainer}>
           <View style={styles.modalContent}>
@@ -46,9 +59,23 @@ export default function App() {
               <Text style={styles.modalHeaderText}>Hello world !</Text>
             </View>
             <View style={styles.modalBody}>
-              <ScrollView>
+              <ScrollView contentContainerStyle={styles.contentContainer}>
+                <Image
+                style={styles.modalImg}
+                  source={require('./assets/image/cross.png')}
+                />
               <Text style={styles.modalBodyText}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto culpa praesentium delectus numquam maxime voluptate aut, neque debitis assumenda reiciendis earum, excepturi officia architecto. Incidunt reprehenderit minus blanditiis tenetur assumenda?</Text>
               </ScrollView>
+            </View>
+            <View style={styles.modalFooter}>
+              <Pressable
+                style={styles.pressableBtnModal}
+                onPress={()=>setShowModal(false)}
+                >
+                <Text style={styles.modalBtn}>
+                  Ok
+                </Text>
+              </Pressable>
             </View>
           </View>
         </View>
@@ -78,7 +105,7 @@ export default function App() {
           })}
         </View>
       </ScrollView> */}
-    </View>
+    </ImageBackground>
  
   );
 }
@@ -111,7 +138,7 @@ const styles = StyleSheet.create({
 modalContent:{
   backgroundColor: '#fff',
   width: '80%',
-  height: '50%',
+  height: '60%',
   borderRadius: 10,
   padding: 20,
   alignItems: 'center',
@@ -139,5 +166,26 @@ modalBody:{
 },
 modalBodyText:{
   fontSize:17,
+},
+modalFooter:{
+  width: '100%',
+},
+pressableBtnModal:{
+  borderBottomRightRadius: 15,
+  borderBottomLeftRadius: 15,
+  backgroundColor: 'lightseagreen'
+},
+modalBtn:{
+  fontSize: 17,
+  color: '#fff',
+  textAlign: 'center',
+  padding: 16
+},
+modalImg:{
+  width: 150,
+  height: 150,
+  margin: 10
 }
+
+
 });
