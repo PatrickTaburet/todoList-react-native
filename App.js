@@ -1,5 +1,5 @@
-import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
+import { StatusBar } from 'expo-status-bar';
 import {
   StyleSheet, Text, 
   TextInput, View, 
@@ -14,10 +14,9 @@ import AddItem from './components/AddItem';
 import Header from './components/Header';
 
 export default function App() {
-
   const [items, setItems] = useState([]);
   const [showModal, setShowModal] = useState(false);
-  
+
   const handleSubmit = (item) => {
     if (item !== ""){
       const idString = Date.now().toString();
@@ -43,8 +42,9 @@ export default function App() {
   })
  }
   return (
-    <ImageBackground style={styles.background} source={require('./assets/image/background.jpg')}>
     
+    <ImageBackground style={styles.background} source={require('./assets/image/background.jpg')}>
+     {/* <StatusBar backgroundColor="#61dafb" barStyle="light-content"/> */}
      <Header style={styles.header}></Header>
      <View style={styles.container}>
       <Modal
@@ -61,7 +61,7 @@ export default function App() {
             <View style={styles.modalBody}>
               <ScrollView contentContainerStyle={styles.contentContainer}>
                 <Image
-                style={styles.modalImg}
+                  style={styles.modalImg}
                   source={require('./assets/image/cross.png')}
                 />
               <Text style={styles.modalBodyText}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto culpa praesentium delectus numquam maxime voluptate aut, neque debitis assumenda reiciendis earum, excepturi officia architecto. Incidunt reprehenderit minus blanditiis tenetur assumenda?</Text>
@@ -80,6 +80,7 @@ export default function App() {
           </View>
         </View>
       </Modal>
+      <Text style={styles.textFont}>blablabal</Text>
         <AddItem
           handleSubmit={handleSubmit}
         />
@@ -116,7 +117,7 @@ const styles = StyleSheet.create({
       width: "100%",
       position: 'absolute',
       top: 0,
-      height: 150
+      height: 150,
   },
   background:{
     flex:1
@@ -126,7 +127,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     padding: 40,
-    paddingTop: 60
   },
   scrollViewList:{
     margin: 10,
@@ -194,7 +194,6 @@ modalImg:{
   width: 150,
   height: 150,
   margin: 10
-}
-
+},
 
 });

@@ -1,5 +1,7 @@
 import React from 'react'
 import { StyleSheet, TouchableOpacity,  View, Text } from 'react-native';
+import Colors  from '../constants/colors';
+
 
 function CustomButton({customStyle, children, customHandleClick}) {
   return (
@@ -20,7 +22,7 @@ export default CustomButton
 
 const styles = StyleSheet.create({
     button:{
-      backgroundColor: 'red',
+      backgroundColor: Colors.danger,
       padding:5,
       height: 40,
       width: 70,

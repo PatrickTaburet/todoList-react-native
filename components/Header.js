@@ -1,8 +1,17 @@
+import { useFonts, Aldrich_400Regular } from '@expo-google-fonts/aldrich';
 import React from 'react';
 import { StyleSheet, Text, View, Image} from 'react-native';
 
 
 const Header = () => {
+    const [fontsLoaded, error] = useFonts({
+        Aldrich_400Regular : Aldrich_400Regular
+      })
+      
+      if (!fontsLoaded) {
+        return null;
+      }
+
   return (
     <View style={styles.headerContainer}>
          <Image
@@ -28,7 +37,8 @@ const styles = StyleSheet.create({
     headerText:{
         color: 'white',
         fontSize: 20,
-        marginTop: 20
+        marginTop: 20,
+        fontFamily: 'Aldrich_400Regular',
     },
     headerLogo:{
         width:50,

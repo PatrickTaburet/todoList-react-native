@@ -2,6 +2,8 @@ import { StyleSheet, Text, View, TextInput, Button } from 'react-native'
 import React from 'react';
 import { useState } from 'react';
 import CustomButton from './CustomButton';
+import Colors  from '../constants/colors';
+
 const AddItem = ({handleSubmit}) => {
 
   const [item, setItem]= useState("");
@@ -41,20 +43,22 @@ export default AddItem
 
 const styles = StyleSheet.create({
     inputContainer:{
-      backgroundColor: "purple",
+      backgroundColor: Colors.purple,
       width: "100%",
       flexDirection:"row",
-      justifyContent:"space-between"
+      justifyContent:"space-between",
+      marginVertical: 6
     },
     textInput:{
       color:"white",
       opacity: 1,
       margin:10,
       marginVertical: 6,
-      width:'50%'
+      width:'50%',
+      margin: "20px"
     },
     buttonStyle:{
-      backgroundColor:"blue",
+      backgroundColor:Colors.successSea,
       padding:5
     },
     buttonBox:{

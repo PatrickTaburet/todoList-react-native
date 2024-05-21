@@ -3,18 +3,20 @@ import { StyleSheet, Text, TextInput, View, Button, ScrollView, FlatList, Toucha
 
 function Products({name, handleDelete, idString}) {
   return (
-    <Pressable
-      onPress={()=>handleDelete(idString)}
-      style={({pressed}) => [
-        {
-          backgroundColor : pressed ? "#9c27b0" : "#673ab7",
-        }
-      ]}
-    >
-      <View style={styles.itemContainer}>
-          <Text style={styles.item}>{name}</Text>
-      </View>
-    </Pressable>
+    <View style={{ margin: 4 }}>
+      <Pressable
+        onPress={()=>handleDelete(idString)}
+        style={({pressed}) => [
+          {
+            backgroundColor : pressed ? "#9c27b0" : "#673ab7",
+          }
+        ]}
+      >
+        <View style={styles.itemContainer}>
+            <Text style={styles.item}>{name}</Text>
+        </View>
+      </Pressable>
+    </View>
   )
 }
 
@@ -27,12 +29,12 @@ const styles = StyleSheet.create({
         backgroundColor: "pink",
         color: "black",
         fontSize: 20,
-        marginVertical: 6,
+        // marginVertical: 6,
         width: "100%"
         
       },
       itemContainer:{
-        width:220
+        width:220,
         
       },
 });
