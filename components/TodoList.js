@@ -1,6 +1,5 @@
 
 import { useState } from 'react';
-import { StatusBar } from 'expo-status-bar';
 import {
   StyleSheet, Text, 
   TextInput, View, 
@@ -45,7 +44,6 @@ const TodoList = () =>{
   return (
 
     <ImageBackground style={styles.background} source={require('../assets/image/background.jpg')}>
-     {/* <StatusBar backgroundColor="#61dafb" barStyle="light-content"/> */}
      <View style={styles.container}>
       <Modal
         visible={showModal}
@@ -80,7 +78,6 @@ const TodoList = () =>{
           </View>
         </View>
       </Modal>
-      <Text style={styles.textFont}>blablabal</Text>
         <AddItem
           handleSubmit={handleSubmit}
         />

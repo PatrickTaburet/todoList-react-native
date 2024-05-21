@@ -1,4 +1,5 @@
 import { StyleSheet, Text, View } from 'react-native';
+import { StatusBar } from 'expo-status-bar';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import Gallery from './components/Gallery';
 import TodoList from './components/TodoList';
@@ -11,7 +12,8 @@ const Tab = createMaterialBottomTabNavigator();
 export default function App() {
   return (
     <NavigationContainer>
-           <Header style={styles.header}></Header>
+      {/* <StatusBar backgroundColor="#61dafb" barStyle="light-content"/> */}
+      <Header style={styles.header}></Header>
 
     <Tab.Navigator
         initialRouteName="Home"
@@ -66,7 +68,7 @@ const styles = StyleSheet.create({
     width: "100%",
     position: 'absolute',
     top: 0,
-    height: 150,
+    height: 100,
 },
 })
 
